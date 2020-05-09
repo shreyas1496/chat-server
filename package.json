@@ -1,0 +1,23 @@
+{
+  "name": "chat-server",
+  "version": "1.0.0",
+  "description": "Private chat app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "real-time",
+    "simple"
+  ],
+  "author": "Shreyas Patankar",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.13.0",
+    "class-validator": "^0.12.2",
+    "graphql": "^15.0.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.0.0-rc.1"
+  }
+}
