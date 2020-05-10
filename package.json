@@ -4,6 +4,12 @@
   "description": "Private chat app",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm run build-ts",
+    "start": "npm run serve",
+    "serve": "node dist/index.js",
+    "watch-node": "nodemon dist/server.js",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -15,9 +21,21 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.13.0",
+    "apollo-server-express": "^2.13.0",
     "class-validator": "^0.12.2",
+    "express": "^4.17.1",
     "graphql": "^15.0.0",
     "reflect-metadata": "^0.1.13",
+    "tslint-config-airbnb": "^5.11.2",
     "type-graphql": "^1.0.0-rc.1"
+  },
+  "devDependencies": {
+    "@types/express": "github:types/express",
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^13.13.5",
+    "nodemon": "^2.0.3",
+    "ts-node": "^8.10.1",
+    "tslint": "^6.1.2",
+    "typescript": "^3.8.3"
   }
 }
