@@ -21,12 +21,16 @@
   "license": "ISC",
   "dependencies": {
     "@types/websocket": "^1.0.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
     "mysql": "^2.18.1",
     "tslint-config-airbnb": "^5.11.2",
     "websocket": "^1.0.31"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.6",
     "@types/express": "github:types/express",
     "@types/mysql": "^2.15.14",
     "@types/node": "^13.13.5",
