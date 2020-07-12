@@ -1,23 +1,30 @@
-import "reflect-metadata";
-import { ApolloServer } from "apollo-server-express";
 const express = require("express");
-import { buildSchema } from "type-graphql";
-import { ChatResolver } from "./resolvers/chat";
+import websocket from "./websocket";
+import { Database } from "./services";
+import { lastNMessages } from "./queries";
 
 const main = async () => {
-  const schema = await buildSchema({
-    resolvers: [ChatResolver],
-    emitSchemaFile: true,
-  });
-
-  const apolloServer = new ApolloServer({ schema });
-
   const app = express();
 
-  apolloServer.applyMiddleware({ app });
+  const db = new Database({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWD,
+    database: process.env.DB_NAME,
+  });
 
-  app.listen(4000, () => {
-    console.log("server started on http://localhost:4000/graphql");
+  app.get(
+    "/messages",
+    // tslint:disable-next-line: variable-name
+    async (_req: any, res: { json: (arg0: unknown) => void }) => {
+      res.json(await db.query(lastNMessages({ limit: 100 })));
+    }
+  );
+
+  websocket(db);
+
+  app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Example app listening on port ${process.env.SERVER_PORT}!`);
   });
 };
 
