@@ -1,6 +1,4 @@
 const express = require("express");
-import https from "https";
-import fs from "fs";
 import cors from "cors";
 import websocket from "./websocket";
 import { Database } from "./services";
@@ -9,13 +7,6 @@ import { lastNMessages } from "./queries";
 const main = async () => {
   const app = express();
   app.use(cors());
-  const httpsServer = https.createServer(
-    {
-      key: fs.readFileSync("server.key"),
-      cert: fs.readFileSync("server.cert"),
-    },
-    app
-  );
 
   const db = new Database({
     host: process.env.DB_HOST,
@@ -34,7 +25,7 @@ const main = async () => {
 
   websocket(db);
 
-  httpsServer.listen(process.env.SERVER_PORT, () => {
+  app.listen(process.env.SERVER_PORT, () => {
     console.log(`Example app listening on port ${process.env.SERVER_PORT}!`);
   });
 };

@@ -1,14 +1,11 @@
-import https from "https";
-import fs from "fs";
+import http from "http";
 import websocket from "websocket";
 import { Database } from "./services";
 import { addMessage } from "./queries";
 
 const setup = (db: Database) => {
-  const server = https.createServer({
-    key: fs.readFileSync("server.key"),
-    cert: fs.readFileSync("server.cert"),
-  });
+  const server = http.createServer();
+
   server.listen(process.env.SOCKET_PORT);
 
   const wsServer = new websocket.server({
